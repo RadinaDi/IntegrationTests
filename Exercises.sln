@@ -9,9 +9,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "StyleCop", "StyleCop", "{58
 		StyleCop\StyleCop.ruleset = StyleCop\StyleCop.ruleset
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WebAPIs", "WebAPIs", "{D3A33222-5B57-4520-ADC1-43A7B4E24AD7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WeatherForecast", "WeatherForecast\WeatherForecast.csproj", "{38B150A8-5622-4775-9E89-3516C79E746E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeatherForecast", "WeatherForecast\WeatherForecast.csproj", "{38B150A8-5622-4775-9E89-3516C79E746E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WeatherForecastTests", "WeatherForecastTests\WeatherForecastTests.csproj", "{6C66CFBF-D0BE-42EA-BEC8-6C03F9D4272D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{490465D0-8D39-4839-828D-75C7503D1A26}"
+	ProjectSection(SolutionItems) = preProject
+		README.txt = README.txt
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,12 +28,13 @@ Global
 		{38B150A8-5622-4775-9E89-3516C79E746E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{38B150A8-5622-4775-9E89-3516C79E746E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{38B150A8-5622-4775-9E89-3516C79E746E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6C66CFBF-D0BE-42EA-BEC8-6C03F9D4272D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6C66CFBF-D0BE-42EA-BEC8-6C03F9D4272D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6C66CFBF-D0BE-42EA-BEC8-6C03F9D4272D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6C66CFBF-D0BE-42EA-BEC8-6C03F9D4272D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{38B150A8-5622-4775-9E89-3516C79E746E} = {D3A33222-5B57-4520-ADC1-43A7B4E24AD7}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {523D3C07-43FB-4D51-90FE-2BB6E12D8480}

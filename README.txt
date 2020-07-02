@@ -1,0 +1,2 @@
+How to test your C# Web API - https://timdeschryver.dev/blog/how-to-test-your-csharp-web-api
+Integration tests in ASP.NET Core - https://docs.microsoft.com/en-us/aspnet/core/test/integration-tests?view=aspnetcore-3.1
