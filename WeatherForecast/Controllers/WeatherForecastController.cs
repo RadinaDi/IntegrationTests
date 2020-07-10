@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using WeatherForecast.Models;
+using WeatherForecast.Storage;
 
 namespace WeatherForecast.Controllers
 {
@@ -16,13 +16,6 @@ namespace WeatherForecast.Controllers
             "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching",
         };
 
-        private readonly ILogger<WeatherForecastController> logger;
-
-        public WeatherForecastController(ILogger<WeatherForecastController> logger)
-        {
-            this.logger = logger;
-        }
-
         [HttpGet]
         public IEnumerable<WeatherForecastModel> Get()
         {
@@ -32,6 +25,8 @@ namespace WeatherForecast.Controllers
                 Date = DateTime.Now.AddDays(index),
                 TemperatureC = rng.Next(-20, 55),
                 Summary = Summaries[rng.Next(Summaries.Length)],
+                Location = (LocationStorage.Instance.Length == 0) ? null :
+                            LocationStorage.Instance[rng.Next(LocationStorage.Instance.Length)],
             })
             .ToArray();
         }
@@ -46,6 +41,8 @@ namespace WeatherForecast.Controllers
                 Date = DateTime.Now.AddDays(1),
                 TemperatureC = rng.Next(-20, 55),
                 Summary = Summaries[rng.Next(Summaries.Length)],
+                Location = (LocationStorage.Instance.Length == 0) ? null :
+                            LocationStorage.Instance[rng.Next(LocationStorage.Instance.Length)],
             };
         }
     }

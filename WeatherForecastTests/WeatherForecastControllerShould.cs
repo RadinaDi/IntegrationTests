@@ -1,12 +1,14 @@
 using FluentAssertions;
 using Microsoft.AspNetCore.Mvc.Testing;
-using Newtonsoft.Json;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using WeatherForecast;
 using WeatherForecast.Models;
+using WeatherForecastTests.Data;
 using WeatherForecastTests.Extensions;
+using WeatherForecastTests.Utils;
 using Xunit;
 
 namespace WeatherForecastTests
@@ -18,15 +20,23 @@ namespace WeatherForecastTests
         {
         }
 
-        [Theory]
-        [InlineData("/weatherforecast")]
-        public async Task RetrieveForecast(string url)
+        [Fact]
+        public async Task RetrieveForecast()
         {
-            var response = await this.HttpClient.SendAsync(url, HttpMethod.Get);
+            var model = LocationData.NewLocationData();
+            var response = await this.HttpClient.SendAsync("/locations", HttpMethod.Post, Json.ToJson(model));
             response.StatusCode.Should().Be(HttpStatusCode.OK);
 
-            var forecast = JsonConvert.DeserializeObject<WeatherForecastModel[]>(await response.Content.ReadAsStringAsync());
+            response = await this.HttpClient.SendAsync("/weatherforecast", HttpMethod.Get);
+            response.StatusCode.Should().Be(HttpStatusCode.OK);
+
+            var body = await response.Content.ReadAsStringAsync();
+            var forecast = Json.ToObject<WeatherForecastModel[]>(body);
             forecast.Should().HaveCount(5);
+            forecast.First().Should().Match<WeatherForecastModel>(x =>
+                                 x.Location.City == model.City &&
+                                 x.Location.State == model.State &&
+                                 x.Location.Country == model.Country);
         }
     }
 }
