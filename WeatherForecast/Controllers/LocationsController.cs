@@ -8,11 +8,6 @@ namespace WeatherForecast.Controllers
     [Route("[controller]")]
     public class LocationsController : ControllerBase
     {
-        private static readonly string[] Summaries = new[]
-        {
-            "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching",
-        };
-
         [HttpPost]
         public void Add(LocationModel model)
         {

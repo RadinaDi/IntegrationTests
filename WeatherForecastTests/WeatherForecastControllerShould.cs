@@ -21,7 +21,7 @@ namespace WeatherForecastTests
         }
 
         [Fact]
-        public async Task RetrieveForecast()
+        public async Task RetrieveNext5DaysForecast()
         {
             var model = LocationData.NewLocationData();
             var response = await this.HttpClient.SendAsync("/locations", HttpMethod.Post, Json.ToJson(model));
@@ -37,6 +37,24 @@ namespace WeatherForecastTests
                                  x.Location.City == model.City &&
                                  x.Location.State == model.State &&
                                  x.Location.Country == model.Country);
+        }
+
+        [Fact]
+        public async Task RetrieveForecastForTomorrow()
+        {
+            var model = LocationData.NewLocationData();
+            var response = await this.HttpClient.SendAsync("/locations", HttpMethod.Post, Json.ToJson(model));
+            response.StatusCode.Should().Be(HttpStatusCode.OK);
+
+            response = await this.HttpClient.SendAsync("/weatherforecast/tomorrow", HttpMethod.Get);
+            response.StatusCode.Should().Be(HttpStatusCode.OK);
+
+            var body = await response.Content.ReadAsStringAsync();
+            var forecast = Json.ToObject<WeatherForecastModel>(body);
+            forecast.Should().Match<WeatherForecastModel>(x =>
+                                       x.Location.City == model.City &&
+                                       x.Location.State == model.State &&
+                                       x.Location.Country == model.Country);
         }
     }
 }
